@@ -1,0 +1,5 @@
+package com.mo.exercise.graph.DAO;
+
+public interface List_relationships_DAO {
+
+}

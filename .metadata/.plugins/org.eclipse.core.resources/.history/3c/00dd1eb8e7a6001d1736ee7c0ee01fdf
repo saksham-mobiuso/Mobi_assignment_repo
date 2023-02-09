@@ -1,0 +1,7 @@
+package com.mo.exercise.graph.DAO;
+
+public class List_persons_DAO {
+	 public void name() {
+		
+	}
+}

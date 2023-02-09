@@ -1,0 +1,5 @@
+package com.mobi.springbootstarter.topic;
+
+public class TopicController {
+
+}
