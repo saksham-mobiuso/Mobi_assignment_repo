@@ -5,7 +5,10 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
+
+import jakarta.persistence.EntityManagerFactory;
 
 @Service
 public class TopicService {
@@ -49,5 +52,6 @@ public class TopicService {
 	public void deleteTopic(String id) {
 		topics.removeIf(t -> t.getId().equals(id));
 	}
+	
 
 }
