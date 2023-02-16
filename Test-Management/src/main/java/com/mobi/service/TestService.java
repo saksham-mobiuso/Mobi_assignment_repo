@@ -13,10 +13,10 @@ public class TestService {
 	@Autowired
 	QuestionsService questionsService;
 		
-	Integer[] selectedQuestionsArr= {1,4,2};       //Get from app
+	Integer[] selectedQuestionsArr= {1,4}; //Get from app
 	
 	int arrLength = selectedQuestionsArr.length;
-	ArrayList<Tests> arr = new ArrayList<>();
+	ArrayList<Tests> generatedTest = new ArrayList<>();
 	
 	public ArrayList<Tests> populateTests() {
 		Tests t=null;
@@ -25,9 +25,9 @@ public class TestService {
 			t.setTestId(101);
 			t.setQuestion(questionsService.getQuestionById(selectedQuestionsArr[i]).getQuestion());
 			t.setOptions(questionsService.getQuestionById(selectedQuestionsArr[i]).getOptionss());
-			arr.add(t);
+			generatedTest.add(t);
 		}	
-		return arr;
+		return generatedTest;
 	}
 
 }

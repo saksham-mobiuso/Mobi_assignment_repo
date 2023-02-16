@@ -2,7 +2,6 @@ package com.mobi.controller;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -38,7 +37,7 @@ public class AdminController {
 		return questionsService.getAllQuestions();
 	}
 	
-	@GetMapping("/home")
+	@GetMapping("/test")
 	public ArrayList<Tests> home() {
 		//return optionsService.getAllOptions();
 		return testService.populateTests();
@@ -48,11 +47,19 @@ public class AdminController {
 	public Questions getQuesionById(@PathVariable Integer id) {
 		return questionsService.getQuestionById(id);
 	}
+		
 	
 	@PostMapping("/question")
-	public void addQuestion(@RequestBody Questions questions) {
-		questionsService.addQuestion(questions);
+	public String addQuestion(@RequestBody Questions questions) {
+		for(Optionss q : questions.getOptionss()) {
+			if(q.getOptionValue().equals(questions.getCorrectOption())) {
+				questionsService.addQuestion(questions);
+				return "Question added";
+			}
+		}
+		return "No correct option!!!!";
 	}
+	
 	
 	@DeleteMapping("/question/{id}")
 	public void deleteQuestion(@PathVariable Integer id) {
