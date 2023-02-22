@@ -1,9 +1,11 @@
 package com.mobi.controller;
 
-import java.util.ArrayList;
-import java.util.List;
 
+import java.util.Date;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,25 +13,29 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.mobi.exceptions.NoCorrectOptionError;
 import com.mobi.models.Optionss;
 import com.mobi.models.Questions;
-import com.mobi.models.Tests;
-import com.mobi.service.OptionsService;
-//import com.mobi.service.QuestionsService;
+import com.mobi.service.AnswersService;
 import com.mobi.service.QuestionsService;
-import com.mobi.service.TestService;
+import com.mobi.service.UserService;
 
 @RestController
 public class AdminController {
 	
 	@Autowired
 	private QuestionsService questionsService;
-	
-//	@Autowired
-//	private OptionsService optionsService;
+
+	@Autowired
+	UserService userService;
 	
 	@Autowired
-	TestService testService;
+	AnswersService answersService;
+	
+//	@GetMapping("/user")
+//	public ArrayList<Questions> getUserTest() {
+//		return userService.takeTest();
+//	}
 	
 
 	@GetMapping("/questions")
@@ -37,12 +43,7 @@ public class AdminController {
 		return questionsService.getAllQuestions();
 	}
 	
-	@GetMapping("/test")
-	public ArrayList<Tests> home() {
-		//return optionsService.getAllOptions();
-		return testService.populateTests();
-	}
-	
+
 	@GetMapping("/question/{id}")
 	public Questions getQuesionById(@PathVariable Integer id) {
 		return questionsService.getQuestionById(id);
@@ -50,14 +51,14 @@ public class AdminController {
 		
 	
 	@PostMapping("/question")
-	public String addQuestion(@RequestBody Questions questions) {
+	public ResponseEntity<String> addQuestion(@RequestBody Questions questions) {
 		for(Optionss q : questions.getOptionss()) {
-			if(q.getOptionValue().equals(questions.getCorrectOption())) {
+			if(q.getOptionValue().equals(questions.getAnswers().getCorrectAnswer())) {
 				questionsService.addQuestion(questions);
-				return "Question added";
+				return ResponseEntity.ok().body("Question Added");
 			}
 		}
-		return "No correct option!!!!";
+	return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Correct Option Not Found");
 	}
 	
 	
@@ -65,4 +66,5 @@ public class AdminController {
 	public void deleteQuestion(@PathVariable Integer id) {
 		questionsService.deleteQuestion(id);
 	}
+	
 }

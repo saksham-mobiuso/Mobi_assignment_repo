@@ -1,6 +1,5 @@
 package com.mobi.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,10 +15,7 @@ public class OptionsService{
 	OptionssRepository optionssRepository;
 	
 	public List<Optionss> getAllOptions() {
-		List<Optionss> optionsses = new ArrayList<>();
 		return (List<Optionss>) optionssRepository.findAll();
-		//return optionsses;
-		
 	}
 	
 }

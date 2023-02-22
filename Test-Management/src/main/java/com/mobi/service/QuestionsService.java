@@ -18,6 +18,7 @@ public class QuestionsService {
 	public List<Questions> getAllQuestions() {
 		List<Questions> questions = new ArrayList<>();
 		questionsRepository.findAll().forEach(questions::add);
+		//System.out.println(questionsRepository.findById(2).get().getAnswers().getCorrectAnswer());
 		return questions;
 	}
 

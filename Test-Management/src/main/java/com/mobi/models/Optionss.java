@@ -25,7 +25,7 @@ public class Optionss {
 	private Questions questions;
 		
 	public Optionss() {
-
+		
 	}
 		
 	public Optionss(Integer questionId, String optionValue, Questions questions) {

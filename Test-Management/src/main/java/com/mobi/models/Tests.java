@@ -1,23 +1,30 @@
 package com.mobi.models;
 
-import java.util.List;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
+@Entity
 public class Tests {
 	
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Integer serialNumber;
+	
 	private Integer testId;
-	private Object testQuestion;
-	private List<Optionss> testOptions;
-	
-	
+
+	private Integer testQuestionId;
 		
 	public Tests() {
+		super();
+		
 	}
-
-	public Tests(Integer testId, Object question, List<Optionss> options) {
+	
+	public Tests(Integer testId, Integer testQuestionId) {
 		super();
 		this.testId = testId;
-		this.testQuestion = question;
-		this.testOptions = options;
+		this.testQuestionId = testQuestionId;
 	}
 	
 	public Integer getTestId() {
@@ -28,20 +35,12 @@ public class Tests {
 		this.testId = testId;
 	}
 	
-	public Object getQuestion() {
-		return testQuestion;
+	public Integer getTestQuestionId() {
+		return testQuestionId;
 	}
 	
-	public void setQuestion(Object question) {
-		this.testQuestion = question;
+	public void setTestQuestionId(Integer testQuestionId) {
+		this.testQuestionId = testQuestionId;
 	}
-	
-	public List<Optionss> getOptions() {
-		return testOptions;
-	}
-	
-	public void setOptions(List<Optionss> options) {
-		this.testOptions = options;
-	}
-		
+
 }
