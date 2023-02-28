@@ -26,7 +26,7 @@ public class TestController {
 	}
 
 	@GetMapping("/tests/{testId}")
-	public ResponseEntity<Object> findTestByTestId(@PathVariable Integer testId) {         //Added Pusblished or not check       TestinfoRepo return type to Testinfo NOT List<TestInfo>
+	public ResponseEntity<Object> findTestByTestId(@PathVariable Integer testId) { 
 		System.out.println("hwlo " + testId);
 		return testService.findTestByTestId(testId);
 	}

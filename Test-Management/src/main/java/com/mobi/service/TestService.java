@@ -30,9 +30,9 @@ public class TestService {
 	TestQuestionsRepository testQuestionsRepository;
 
 	public ResponseEntity<CustomError> createTests(TestInfo testInfo) {
-		// int randomTestId = (int) (Math.random() * 300);
-		int randomTestId = 1;
-		if (testInfoRepository.findByTestId(randomTestId).equals(null)) {
+		int randomTestId = (int) (Math.random() * 300);
+		//int randomTestId = 1;
+		if (testInfoRepository.findByTestId(randomTestId) == null) {
 			testInfo.setTestId(randomTestId);
 			testInfo.getTestQuestions().stream().forEach(q -> q.setTestId(randomTestId));
 			testInfoRepository.save(testInfo);
@@ -76,10 +76,11 @@ public class TestService {
 		List<Integer> testQuestionList = new ArrayList<>();
 		testQuestionsRepository.findByTestId(testId).stream()
 				.forEach(tempQId -> testQuestionList.add(tempQId.getTestQuestionsId()));
+		int questionListSize = testQuestionList.size();
 
 		{
 			List<Integer> newList = new ArrayList<>();
-			for (int i = 0; i < testQuestionList.size(); i++) {
+			for (int i = 0; i < questionListSize; i++) {
 
 				int randomIndex = rand.nextInt(testQuestionList.size());
 
@@ -87,8 +88,7 @@ public class TestService {
 
 				testQuestionList.remove(randomIndex);
 			}
-			if (!testQuestionList.isEmpty())
-				newList.add(testQuestionList.get(0));
+		
 			System.out.println(newList);
 			return newList;
 		}
@@ -109,7 +109,7 @@ public class TestService {
 		Optional<TestInfo> testData = testInfoRepository.findById(testId);
 		if (testData.isPresent()) {
 			testInfoRepository.save(info);
-		}
+		} 
 	}
 
 }
