@@ -4,6 +4,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 @Entity
@@ -28,6 +29,7 @@ public class TestInfo {
 		this.publishStatus = publishStatus;
 		this.testQuestions = testQuestions;
 	}
+	
 
 	public Integer getTestId() {
 		return testId;
@@ -60,8 +62,5 @@ public class TestInfo {
 	public void setTestQuestions(List<TestQuestions> testQuestions) {
 		this.testQuestions = testQuestions;
 	}
-	
-
-	
 
 }
